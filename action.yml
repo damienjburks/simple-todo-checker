@@ -1,23 +1,33 @@
-name: 'Simple TODO Checker'
-description: 'Action that checks for TODO comments in various files.'
-author: 'Damien Burks'
+name: "Simple TODO Checker"
+description: "Action that checks for TODO comments in various files."
+author: "Damien Burks"
 
 runs:
-  using: 'docker'
-  image: 'python-312'
-  entrypoint: 'python main.py'
+  using: "docker"
+  image: "./Dockerfile" # Points to Dockerfile in the root directory
+  entrypoint: "python"
+  args:
+    [
+      "main.py",
+      "--path",
+      "${{ inputs.path }}",
+      "--extensions",
+      "${{ inputs.extensions }}",
+      "--todo_pattern",
+      "${{ inputs.todo_pattern }}",
+    ]
 
 branding:
-  icon: 'check-square'
-  color: 'purple'
+  icon: "check-square"
+  color: "purple"
 
 inputs:
   path:
-    description: 'File directory path for checking TODOs.'
+    description: "File directory path for checking TODOs."
     required: true
   extensions:
-    description: 'Comma-separated list of file extensions to check (e.g., .py,.js,.html)'
+    description: "Comma-separated list of file extensions to check (e.g., .py,.js,.html)"
     required: false
   todo_pattern:
-    description: 'Custom regular expression to detect your TODOs.'
+    description: "Custom regular expression to detect your TODOs."
     required: false
