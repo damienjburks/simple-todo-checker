@@ -1,7 +1,7 @@
 name: "Pylint Check - Python"
 
 on:
-  workflow_call:
+  pull_request:
 
 jobs:
   pylint_check:

@@ -1,7 +1,7 @@
 name: "Black (FMT) Check - Python"
 
 on:
-  workflow_call:
+  pull_request:
 
 jobs:
   format_check:
