@@ -1,5 +1,7 @@
 # Simple TODO Checker
 
+> **NOTE**: This repository is still undergoing development. Please wait until it is complete.
+
 **Simple TODO Checker** is a GitHub Action that scans code for `TODO` comments across various languages and file types, helping developers manage their in-code TODOs in a multi-language repository. This action can handle different comment syntaxes for `TODO` across many popular programming languages and file formats.
 
 ## Features

@@ -1,0 +1,50 @@
+[MASTER]
+# Specify a configuration file.
+rcfile=
+# Python code to analyze
+init-hook='import sys; sys.path.append(".")'
+
+# List of plugins to load
+load-plugins=
+
+# Treat extensions as part of the main module
+extension-pkg-whitelist=
+
+# Add files or directories that should not be checked
+ignore=
+ignore-patterns=
+
+[MESSAGES CONTROL]
+# Enable or disable the following messages
+disable=
+    # Disable specific warnings based on your requirements:
+    dangerous-default-value,   # W0102
+    redefined-outer-name,      # W0621
+    too-few-public-methods,    # R0903
+    pointless-string-statement # W0105
+
+[FORMAT]
+# Maximum number of characters on a single line.
+max-line-length=100
+
+[DESIGN]
+# Maximum number of arguments for a function / method
+max-args=10
+
+# Maximum number of nested blocks
+max-nested-blocks=5
+
+# Minimum number of public methods for a class (disable if you have data classes or single-method classes)
+min-public-methods=1
+
+[REPORTS]
+# Do not display the evaluation results of each checker
+reports=no
+
+[LOGGING]
+# Logging modules to check that the string format arguments are in logging functions.
+logging-modules=logging
+
+[BASIC]
+# Naming style matching correct names
+good-names=i,j,k,e
