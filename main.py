@@ -7,6 +7,8 @@ import sys
 import re
 import argparse
 
+os.environ["WORKSPACE"] = os.getcwd()
+
 # Regular expressions to match TODOs in comments across various languages
 TODO_PATTERNS = [
     r"#\s*todo\s*:",  # Python, JavaScript, HTML, C/C++, Java, Shell
@@ -109,6 +111,12 @@ if __name__ == "__main__":
         default=TODO_PATTERNS,
         help="Custom regular expression to detect your TODOs.",
     )
+    parser.add_argument(
+        "--is_local",
+        type=bool,
+        default=False,
+        help="Configure local run",
+    )
     args = parser.parse_args()
 
     # Split extensions input into a tuple for file filtering
@@ -117,7 +125,9 @@ if __name__ == "__main__":
     except AttributeError:
         extensions = tuple(DEFAULT_EXTENSIONS)
 
-    list_of_todos = TodoChecker(path=args.path, extensions=extensions).find_todos()
+    path = os.path.join(os.environ["WORKSPACE"], args.path)
+
+    list_of_todos = TodoChecker(path=path, extensions=extensions).find_todos()
 
     if list_of_todos:
         print("Found TODO's in the following files: ")
