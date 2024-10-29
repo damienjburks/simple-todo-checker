@@ -32,8 +32,9 @@ DEFAULT_EXTENSIONS = [
     ".sh",
     ".twig",
     ".yml",
-    ".yaml"
+    ".yaml",
 ]
+
 
 class TodoChecker:
     """
@@ -56,7 +57,7 @@ class TodoChecker:
         :return: A list of strings representing the TODOs found in the files.
         :rtype: list
         """
-        
+
         todos = []
         todo_regex = re.compile("|".join(TODO_PATTERNS), re.IGNORECASE)
 
