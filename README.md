@@ -52,11 +52,9 @@ If no TODO comments are found, it will output:
 No TODOs found!
 ```
 
-## Usage
+## Contributing
 
-### Error Handling
-
-If a file cannot be read due to encoding, Simple TODO Checker will attempt to open it in `ISO-8859-1`. If further issues arise, ensure the files are compatible with the specified encodings.
+If you encounter any issues, please feel free to raise an issue or submit a PR. Anyone who wishes to contribute is encouraged to do so. If interested, please review the [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
 ## License
 
