@@ -1,6 +1,8 @@
 # Simple TODO Checker
 
-> **NOTE**: This repository is still undergoing development. Please wait until it is complete.
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Simple%20Todo%20Checker-blue?logo=github)](https://github.com/marketplace/actions/simple-todo-checker)
+![Code Quality Linter](https://github.com/damienjburks/simple-todo-checker/actions/workflows/linter.yml/badge.svg)
+![Docker Publish](https://github.com/damienjburks/simple-todo-checker/actions/workflows/publish-image.yml/badge.svg)
 
 **Simple TODO Checker** is a GitHub Action that scans code for `TODO` comments across various languages and file types, helping developers manage their in-code TODOs in a multi-language repository. This action can handle different comment syntaxes for `TODO` across many popular programming languages and file formats.
 
@@ -53,6 +55,42 @@ If no TODO comments are found, it will output:
 ```text
 No TODOs found!
 ```
+
+## Usage
+
+To use this action in your workflow, please add the following step below:
+
+```yaml
+name: TODO Checker
+
+on:
+  pull_request:
+
+jobs:
+  find-todos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Simple TODO Checker
+        uses: damienjburks/simple-todo-checker@0.1.1-alpha
+        with:
+          path: "." # Scan default folder as this is required.
+```
+
+I highly recommend only run this action during pull requests.
+
+### Configuration
+
+You can configure the action further by providing the following inputs:
+
+| Input              | Description                                                                     | Required |
+| ------------------ | ------------------------------------------------------------------------------- | -------- |
+| **`path`**         | File directory path for checking TODOs.                                         | Yes      |
+| **`extensions`**   | Comma-separated list of file extensions to check (e.g., `.py`, `.js`, `.html`). | No       |
+| **`todo_pattern`** | Custom regular expression to detect your TODOs.                                 | No       |
 
 ## Contributing
 
