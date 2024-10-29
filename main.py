@@ -1,3 +1,7 @@
+"""
+Main module for the Simple TODO Checker.
+"""
+
 import os
 import sys
 import re
@@ -33,6 +37,9 @@ DEFAULT_EXTENSIONS = [
 
 class TodoChecker:
     """
+    This is the main class for the Simple TODO Checker.
+    It takes a path and a list of file extensions to check for TODOs.
+    It recursively searches the given path for files with the specified extensions
     """
 
     def __init__(self, path=".", extensions=DEFAULT_EXTENSIONS):
@@ -41,6 +48,13 @@ class TodoChecker:
 
     def find_todos(self):
         """
+        This method finds all TODOs in the specified path and returns a list of them.
+        It uses regular expressions to match TODOs in comments across various languages.
+        It attempts to open the files with UTF-8 encoding first, but if that fails,
+        it falls back to 'ISO-8859-1' encoding.
+
+        :return: A list of strings representing the TODOs found in the files.
+        :rtype: list
         """
         
         todos = []
@@ -74,6 +88,9 @@ class TodoChecker:
 
 if __name__ == "__main__":
     """
+    This is the main entry point for the Simple TODO Checker.
+    It parses command-line arguments and calls the TodoChecker class to find TODOs.
+    If TODOs are found, it prints them and exits with an error code.
     """
     parser = argparse.ArgumentParser(description="Simple TODO Checker")
     parser.add_argument(
