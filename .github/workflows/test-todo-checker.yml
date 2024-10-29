@@ -16,6 +16,4 @@ jobs:
       - name: Run Simple TODO Checker
         uses: ./  # Use the action defined in the repository
         with:
-          path: "/.env"  # Path relative to the repository root
-          extensions: ".py,.js"  # Optional: specify file types
-          todo_pattern: "(#|//|/\\*|<!--|;|%)\\s*TODO"  # Optional: custom pattern
+          path: "."  # Path relative to the repository root
