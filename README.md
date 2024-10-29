@@ -80,7 +80,7 @@ jobs:
           path: "." # Scan default folder as this is required.
 ```
 
-I highly recommend only run this action during pull requests.
+I highly recommend that you only run this action during pull requests, since it'll fail when it finds TODO comments.
 
 ### Configuration
 
