@@ -10,7 +10,7 @@ runs:
     [
       "main.py",
       "--path",
-      "${{ inputs.path }}",
+      "${{ github.workspace }}${{ inputs.path }}",
       "--extensions",
       "${{ inputs.extensions }}",
       "--todo_pattern",

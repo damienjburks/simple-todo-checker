@@ -106,13 +106,16 @@ if __name__ == "__main__":
     parser.add_argument(
         "--todo_pattern",
         type=str,
-        default=DEFAULT_EXTENSIONS,
+        default=TODO_PATTERNS,
         help="Custom regular expression to detect your TODOs.",
     )
     args = parser.parse_args()
 
     # Split extensions input into a tuple for file filtering
-    extensions = tuple(args.extensions.split(","))
+    try:
+        extensions = tuple(args.extensions.split(","))
+    except AttributeError:
+        extensions = tuple(DEFAULT_EXTENSIONS)
 
     list_of_todos = TodoChecker(path=args.path, extensions=extensions).find_todos()
 
