@@ -9,7 +9,7 @@ on:
       - main
       
 jobs:
-  formatting-and-linting:
+  check-format-and-syntax:
     runs-on: ubuntu-latest
 
     steps:
