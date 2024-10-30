@@ -3,6 +3,7 @@
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Simple%20Todo%20Checker-blue?logo=github)](https://github.com/marketplace/actions/simple-todo-checker)
 ![Code Quality Linter](https://github.com/damienjburks/simple-todo-checker/actions/workflows/linter.yml/badge.svg)
 ![Docker Publish](https://github.com/damienjburks/simple-todo-checker/actions/workflows/publish-image.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/damienjburks/simple-todo-checker/badge.svg?branch=main)](https://coveralls.io/github/damienjburks/simple-todo-checker?branch=main)
 
 **Simple TODO Checker** is a GitHub Action that scans code for `TODO` comments across various languages and file types, helping developers manage their in-code TODOs in a multi-language repository. This action can handle different comment syntaxes for `TODO` across many popular programming languages and file formats.
 
@@ -75,7 +76,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Simple TODO Checker
-        uses: damienjburks/simple-todo-checker@0.1.1-alpha
+        uses: damienjburks/simple-todo-checker@x.x.x
         with:
           path: "." # Scan default folder as this is required.
 ```

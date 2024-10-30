@@ -5,11 +5,11 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Copy the action files into the Docker image
-COPY main.py /app/main.py
+COPY ./src/todo_checker.py /app/todo_checker.py
 COPY requirements.txt /app/requirements.txt
 
 # Install any dependencies
 RUN pip install -r requirements.txt
 
 # Set the entrypoint to run the script
-ENTRYPOINT ["python", "/app/main.py"]
+ENTRYPOINT ["python", "/app/todo_checker.py"]

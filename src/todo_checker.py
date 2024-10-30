@@ -95,9 +95,9 @@ class TodoChecker:
         return todos
 
 
-if __name__ == "__main__":
+def main():
     """
-    This is the main entry point for the Simple TODO Checker.
+    This is the main function for the Simple TODO Checker.
     It parses command-line arguments and calls the TodoChecker class to find TODOs.
     If TODOs are found, it prints them and exits with an error code.
     """
@@ -154,3 +154,12 @@ if __name__ == "__main__":
         sys.exit(1)  # Exit with error to fail the action if TODOs are found
     else:
         print("No TODOs found!")
+
+
+if __name__ == "__main__":
+    """
+    This is the main entry point for the Simple TODO Checker.
+    It parses command-line arguments and calls the TodoChecker class to find TODOs.
+    If TODOs are found, it prints them and exits with an error code.
+    """
+    main()
