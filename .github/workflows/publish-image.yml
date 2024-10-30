@@ -29,7 +29,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          push: true  # Set to false if you don't want to push the image
+          push: true # Set to false if you don't want to push the image
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ github.sha }}
