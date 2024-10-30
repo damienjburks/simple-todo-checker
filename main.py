@@ -11,7 +11,6 @@ import argparse
 os.environ["WORKSPACE"] = os.getcwd()
 
 # Regular expressions to match TODOs in comments across various languages
-global TODO_PATTERNS
 TODO_PATTERNS = [
     r"#\s*todo\s*:",  # Python, JavaScript, HTML, C/C++, Java, Shell
     r"//\s*todo\s*:",  # C/C++
@@ -47,9 +46,10 @@ class TodoChecker:
     It recursively searches the given path for files with the specified extensions
     """
 
-    def __init__(self, path=".", extensions=DEFAULT_EXTENSIONS):
+    def __init__(self, path, extensions, todo_patterns):
         self.path = path
         self.extensions = extensions
+        self.todo_patterns = todo_patterns
 
     def find_todos(self):
         """
@@ -63,7 +63,11 @@ class TodoChecker:
         """
 
         todos = []
-        todo_regex = re.compile("|".join(TODO_PATTERNS), re.IGNORECASE)
+
+        if len(self.todo_patterns) == 1:
+            todo_regex = re.compile(self.todo_patterns[0], re.IGNORECASE)
+        else:
+            todo_regex = re.compile("|".join(self.todo_patterns), re.IGNORECASE)
 
         for root, _, files in os.walk(self.path):
             for file in files:
@@ -121,6 +125,10 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    path = args.path
+    extensions = args.extensions
+    todo_patterns = args.todo_pattern
+
     # Split extensions input into a tuple for file filtering
     try:
         extensions = tuple(args.extensions.split(","))
@@ -128,14 +136,16 @@ if __name__ == "__main__":
         extensions = tuple(DEFAULT_EXTENSIONS)
 
     # Getting GH Actions Environment Variables
-    if os.environ.get("INPUT_PATH") is not None:
+    if os.environ.get("INPUT_PATH"):
         path = os.environ.get("INPUT_PATH")
-    if os.environ.get("INPUT_EXTENSIONS") is not None:
-        extensions = tuple(os.environ.get("INPUT_EXTENSIONS").split(", "))
-    if os.environ.get("INPUT_TODO_PATTERN") is not None:
-        TODO_PATTERNS = [os.environ.get("INPUT_TODO_PATTERN")]
+    if os.environ.get("INPUT_EXTENSIONS"):
+        extensions = tuple(os.environ.get("INPUT_EXTENSIONS").split(","))
+    if os.environ.get("INPUT_TODO_PATTERN"):
+        todo_patterns = [os.environ.get("INPUT_TODO_PATTERN")]
 
-    list_of_todos = TodoChecker(path=path, extensions=extensions).find_todos()
+    list_of_todos = TodoChecker(
+        path=path, extensions=extensions, todo_patterns=todo_patterns
+    ).find_todos()
 
     if list_of_todos:
         print("Found TODO's in the following files: ")
