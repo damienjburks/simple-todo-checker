@@ -4,6 +4,7 @@
 ![Code Quality Linter](https://github.com/damienjburks/simple-todo-checker/actions/workflows/linter.yml/badge.svg)
 ![Docker Publish](https://github.com/damienjburks/simple-todo-checker/actions/workflows/publish-image.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/damienjburks/simple-todo-checker/badge.svg?branch=main)](https://coveralls.io/github/damienjburks/simple-todo-checker?branch=main)
+![Unit Tests](https://github.com/damienjburks/simple-todo-checker/actions/workflows/unittests.yml/badge.svg)
 
 **Simple TODO Checker** is a GitHub Action that scans code for `TODO` comments across various languages and file types, helping developers manage their in-code TODOs in a multi-language repository. This action can handle different comment syntaxes for `TODO` across many popular programming languages and file formats.
 
