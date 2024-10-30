@@ -7,9 +7,11 @@ import sys
 import re
 import argparse
 
+# Global Environmnet Variables
 os.environ["WORKSPACE"] = os.getcwd()
 
 # Regular expressions to match TODOs in comments across various languages
+global TODO_PATTERNS
 TODO_PATTERNS = [
     r"#\s*todo\s*:",  # Python, JavaScript, HTML, C/C++, Java, Shell
     r"//\s*todo\s*:",  # C/C++
@@ -125,7 +127,13 @@ if __name__ == "__main__":
     except AttributeError:
         extensions = tuple(DEFAULT_EXTENSIONS)
 
-    path = os.path.join(os.environ["WORKSPACE"], args.path)
+    # Getting GH Actions Environment Variables
+    if os.environ.get("INPUT_PATH") is not None:
+        path = os.environ.get("INPUT_PATH")
+    if os.environ.get("INPUT_EXTENSIONS") is not None:
+        extensions = tuple(os.environ.get("INPUT_EXTENSIONS").split(", "))
+    if os.environ.get("INPUT_TODO_PATTERN") is not None:
+        TODO_PATTERNS = [os.environ.get("INPUT_TODO_PATTERN")]
 
     list_of_todos = TodoChecker(path=path, extensions=extensions).find_todos()
 

@@ -4,18 +4,7 @@ author: "Damien Burks"
 
 runs:
   using: "docker"
-  image: "./Dockerfile" # Points to Dockerfile in the root directory
-  entrypoint: "python"
-  args:
-    [
-      "main.py",
-      "--path",
-      "${{ inputs.path }}",
-      "--extensions",
-      "${{ inputs.extensions }}",
-      "--todo_pattern",
-      "${{ inputs.todo_pattern }}",
-    ]
+  image: "Dockerfile" # Points to Dockerfile in the root directory
 
 branding:
   icon: "check-square"
