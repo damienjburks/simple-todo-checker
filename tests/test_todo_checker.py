@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 from src.todo_checker import TodoChecker, main
 
+
 class TestTodoChecker(unittest.TestCase):
     def setUp(self):
         self.test_dir = tempfile.TemporaryDirectory()
@@ -18,16 +19,20 @@ class TestTodoChecker(unittest.TestCase):
         self.test_dir.cleanup()
 
     def test_find_todos_with_default_patterns(self):
-        checker = TodoChecker(path=self.test_dir.name, extensions=('.py',), todo_patterns=[
-            r"#\s*todo\s*:"
-        ])
+        checker = TodoChecker(
+            path=self.test_dir.name,
+            extensions=(".py",),
+            todo_patterns=[r"#\s*todo\s*:"],
+        )
         todos = checker.find_todos()
         self.assertIn(f"{self.test_file_path} (Line 1): # TODO: Fix this issue", todos)
 
     def test_find_todos_with_multiple_patterns(self):
-        checker = TodoChecker(path=self.test_dir.name, extensions=('.py',), todo_patterns=[
-            r"#\s*todo\s*:", r"//\s*todo\s*:"
-        ])
+        checker = TodoChecker(
+            path=self.test_dir.name,
+            extensions=(".py",),
+            todo_patterns=[r"#\s*todo\s*:", r"//\s*todo\s*:"],
+        )
         todos = checker.find_todos()
         self.assertEqual(len(todos), 1)
         self.assertIn(f"{self.test_file_path} (Line 1): # TODO: Fix this issue", todos)
@@ -35,11 +40,14 @@ class TestTodoChecker(unittest.TestCase):
     def test_no_todos_found(self):
         with open(self.test_file_path, "w") as f:
             f.write("# This file has no TODOs\n")
-        checker = TodoChecker(path=self.test_dir.name, extensions=('.py',), todo_patterns=[
-            r"#\s*todo\s*:"
-        ])
+        checker = TodoChecker(
+            path=self.test_dir.name,
+            extensions=(".py",),
+            todo_patterns=[r"#\s*todo\s*:"],
+        )
         todos = checker.find_todos()
         self.assertEqual(len(todos), 0)
+
 
 class TestMain(unittest.TestCase):
     @patch("sys.exit")
@@ -51,16 +59,20 @@ class TestMain(unittest.TestCase):
             path="test_dir",
             extensions=".py,.js",
             todo_pattern=["#\\s*todo\\s*:"],
-            is_local=False
+            is_local=False,
         )
-        
+
         # Mock environment variables if needed
         os.environ["INPUT_PATH"] = "test_dir"
         os.environ["INPUT_EXTENSIONS"] = ".py,.js"
         os.environ["INPUT_TODO_PATTERN"] = "#\\s*todo\\s*:"
 
         # Mock the TodoChecker to simulate finding TODOs
-        with patch.object(TodoChecker, "find_todos", return_value=["file1.py (Line 1): # TODO: Example"]):
+        with patch.object(
+            TodoChecker,
+            "find_todos",
+            return_value=["file1.py (Line 1): # TODO: Example"],
+        ):
             main()
 
             # Assert sys.exit(1) was called since TODOs were found
@@ -77,9 +89,9 @@ class TestMain(unittest.TestCase):
             path="test_dir",
             extensions=".py,.js",
             todo_pattern=["#\\s*todo\\s*:"],
-            is_local=False
+            is_local=False,
         )
-        
+
         # Mock environment variables if needed
         os.environ["INPUT_PATH"] = "test_dir"
         os.environ["INPUT_EXTENSIONS"] = ".py,.js"
@@ -91,6 +103,7 @@ class TestMain(unittest.TestCase):
 
             # Assert sys.exit(0) was called since no TODOs were found
             mock_print.assert_called_once_with("No TODOs found!")
+
 
 if __name__ == "__main__":
     unittest.main()

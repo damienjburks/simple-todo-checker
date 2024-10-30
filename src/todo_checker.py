@@ -94,6 +94,7 @@ class TodoChecker:
 
         return todos
 
+
 def main():
     """
     This is the main function for the Simple TODO Checker.
@@ -154,6 +155,7 @@ def main():
     else:
         print("No TODOs found!")
 
+
 if __name__ == "__main__":
     """
     This is the main entry point for the Simple TODO Checker.
@@ -161,4 +163,3 @@ if __name__ == "__main__":
     If TODOs are found, it prints them and exits with an error code.
     """
     main()
-    
